@@ -1,0 +1,39 @@
+<div class="intro-banner mt-10 mb-5">
+  <div class="container">
+    <img src="../assets/intro-banner.png" class="img-fluid intro-banner">
+  </div>
+</div> <!-- intro-banner -->
+
+<div class="surah-card-wrapper">
+  <div class="container">
+    <div class="grid grid-cols-4 gap-4">
+
+      @for (item of topicsList; track item.id) {
+
+      <a class="surah-card" routerLink="/media-list">
+
+        <h4 class="surah-name h4 mb-3"> {{item.name}} </h4>
+
+        <div class="mb-3">
+
+          <p class="bold mb-3"> متابعة المشاهدة (50%) </p>
+
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-primary h-2.5 rounded-full" style="width: 50%"></div>
+          </div>
+
+        </div> <!-- mb-3 -->
+
+        <div class="surah-details flex">
+          <p class="videos-count color-gray3 m-0"> 10 حلقات </p>
+          <span class="mx-2 color-gray3"> - </span>
+          <p class="videos-time color-gray3 m-0"> 55 د </p>
+        </div> <!-- surah-details -->
+
+      </a><!-- surah-card -->
+
+      }
+
+    </div> <!-- row -->
+  </div> <!-- container -->
+</div> <!-- surah-card -->

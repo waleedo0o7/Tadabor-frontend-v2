@@ -1,13 +1,14 @@
+import { CourseNavbarComponent } from './../shared/course-navbar/course-navbar.component';
 import { Component } from '@angular/core';
-import { CourseNavbarComponent } from '../shared/course-navbar/course-navbar.component';
 
 @Component({
-  selector: 'app-course-item',
+  selector: 'app-text-list',
   standalone: true,
   imports: [CourseNavbarComponent],
-  templateUrl: './course-item.component.html',
+  templateUrl: './text-list.component.html',
 })
-export class CourseItemComponent {
+export class TextListComponent {
+
   mediaList = [
     { id: 0, name: 'المقدمة', isActive: false },
     { id: 1, name: '1-2', isActive: false },
@@ -28,4 +29,5 @@ export class CourseItemComponent {
     { id: 1, name: '18-25', isActive: false },
     { id: 1, name: '18-25', isActive: false },
   ];
+
 }

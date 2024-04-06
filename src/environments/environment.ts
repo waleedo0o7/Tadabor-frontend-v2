@@ -1,4 +1,5 @@
 export const environment = {
+  apiUrl: 'https://tadabour-api.azurewebsites.net/api/v1',
   firebaseConfig: {
     apiKey: 'AIzaSyDiMe5t6PGGfpDJjvxiRuIS1mR_23VXkWQ',
     authDomain: 'tadabour-ec8d1.firebaseapp.com',

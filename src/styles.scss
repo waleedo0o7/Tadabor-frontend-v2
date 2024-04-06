@@ -121,7 +121,7 @@ input[type="checkbox"] {
 
 .topics-list {
   border-radius: 25px;
-  padding: 15px;
+  padding: 13px;
   background-color: #f0f2f5;
 
   .topic-card {
@@ -138,19 +138,21 @@ input[type="checkbox"] {
     }
 
     .co-checkbox {
-      width: 10%;
+      width: 23px;
+    }
+
+    .co-time {
+      width: 100px;
+      text-align: center;
     }
 
     .co-title {
       flex-grow: 1;
     }
 
-    .co-time {
-      width: 20%;
-    }
 
     .co-buttons {
-      width: fit-content;
+      width: 85px;
     }
 
   }

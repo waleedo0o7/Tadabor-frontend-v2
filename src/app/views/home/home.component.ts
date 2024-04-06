@@ -1,25 +1,25 @@
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-// import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
+import { Topic } from '../../core/models/topic.model';
+import { CommonModule } from '@angular/common';
+import { CourseListComponent } from '../course-list/course-list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule , CommonModule, RouterOutlet, RouterLink, RouterLinkActive, CourseListComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  progressbarHeight = '7px';
+  constructor(private router:Router) {}
 
-  items = [
-    { id: 1, progreessValue: '10%' },
-    { id: 1, progreessValue: '40%' },
-    { id: 1, progreessValue: '60%' },
-    { id: 1, progreessValue: '10%' },
-    { id: 1, progreessValue: '20%' },
-    { id: 1, progreessValue: '10%' },
-    { id: 1, progreessValue: '80%' },
-    { id: 1, progreessValue: '100%' },
-    { id: 1, progreessValue: '15%' },
-  ];
+
+  ngOnInit() {
+    this.router.navigate([`/courses-list/1/topics-list`]);
+
+  }
+
 }

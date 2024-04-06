@@ -12,11 +12,9 @@
       <div class="flex-grow">
         <div class="end">
           <ul class="reset-list top-menu">
-            <li class="menu-item">
-              <a class="btn-light active " routerLink="/course-list"> تدبر القرآن الكريم </a>
-            </li>
-            <li class="menu-item"> <a class="btn-light" routerLink="course-list"> تدبر أسماء الله الحسنى </a></li>
-            <li class="menu-item"> <a class="btn-light" routerLink="course-list"> تدبر السنة </a></li>
+            @for (item of coursesList; track item.id) {
+              <li class="menu-item"><a class="btn-light" (click)="onNav(item.id)">  {{ item.title }}  {{ item.id }} </a></li>
+            }
           </ul>
           <a routerLink="/"> <img src="../assets/logo.svg" class="img-fluid logo"> </a>
         </div>

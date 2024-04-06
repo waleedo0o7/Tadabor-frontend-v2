@@ -1,13 +1,52 @@
+import { SharedService } from './../../../core/services/shared.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { CourseNavbarComponent } from '../course-navbar/course-navbar.component';
+import { Course } from '../../../core/models/course.model';
+import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    CourseNavbarComponent,
+    HttpClientModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
 })
 
-export class HeaderComponent {}
+export class HeaderComponent {
+
+  private apiUrl = environment.apiUrl;
+  constructor(private http: HttpClient, private sharedService: SharedService) {}
+
+
+
+
+  coursesList!:Course[];
+
+  getData(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl}/courses`);
+  }
+
+
+  onNav(id:Number){
+    this.sharedService.navSubject.next(id);
+  }
+
+  ngOnInit() {
+    this.getData().subscribe((data:Course[]) => {
+      this.coursesList = data
+    });
+  }
+
+
+}
