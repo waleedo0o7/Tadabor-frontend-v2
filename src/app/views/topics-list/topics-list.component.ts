@@ -32,31 +32,42 @@ export class TopicsListComponent {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private route: ActivatedRoute , private sharedService: SharedService) {
-    // if ( this.route.snapshot.paramMap.get('id') ) {
-    //   this.coursesListId = this.route.snapshot.paramMap.get('id');
-    // } else {
-    //   this.coursesListId = 1;
-    // }
+
+    this.coursesId = this.route.snapshot.paramMap.get('id');
+
+    this.sharedService.navSubject.next(this.coursesId);
+
   }
 
   topicsList!: Topic[];
-  coursesListId: any;
+
+  coursesId: any;
 
   getData(id:any): Observable<Topic[]> {
+
     return this.http.get<Topic[]>(`
+
       ${this.apiUrl}/courses/${id}/topics`);
+
   }
 
   ngOnInit() {
 
     this.sharedService.navSubject.subscribe(
+
       e => {
+
+        console.log(e);
+
         this.getData(e).subscribe((data: Topic[]) => {
+
           this.topicsList = data;
+
         });
       }
     );
 
+    this.sharedService.navSubject.next(this.coursesId);
 
   }
 }
