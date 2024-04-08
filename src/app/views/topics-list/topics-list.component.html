@@ -10,7 +10,7 @@
 
       @for (item of topicsList; track item.id) {
 
-      <a class="surah-card" routerLink="/media-list">
+      <a class="surah-card" (click)="onNavOpenMedia(item.id , item.name)">
 
         <h4 class="surah-name h4 mb-3"> {{item.name}} </h4>
 

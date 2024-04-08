@@ -11,9 +11,9 @@ export const routes: Routes = [
 
   { path: '', component: HomeComponent },
 
-  { path: 'courses-list/:id/topics-list', component: TopicsListComponent } ,
+  { path: 'courses-list/:cid/topics-list', component: TopicsListComponent } ,
 
-  { path: 'media-list', component: MediaListComponent },
+  { path: 'courses-list/:cid/topics-list/:tid/media-list', component: MediaListComponent },
 
   { path: 'text-list', component: TextListComponent },
   { path: 'course-item', component: CourseItemComponent },

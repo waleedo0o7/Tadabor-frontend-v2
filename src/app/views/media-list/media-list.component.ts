@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { VideoLesson } from '../../core/models/video-lesson.model';
+import { SharedService } from '../../core/services/shared.service';
 
 @Component({
   selector: 'app-media-list',
@@ -27,15 +28,21 @@ import { VideoLesson } from '../../core/models/video-lesson.model';
   templateUrl: './media-list.component.html',
 })
 export class MediaListComponent {
+
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-    this.mediaListId = this.route.snapshot.paramMap.get('id');
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService: SharedService) {
+    this.coursesId = this.route.snapshot.paramMap.get('cid');
+    this.topicId = this.route.snapshot.paramMap.get('tid');
+    console.log(this.coursesId , this.topicId);
   }
 
   mediaList!: VideoLesson[];
+  coursesId: any;
+  topicId: any;
   mediaListId: any;
 
-  convertSeconds(time: any) {
+  convertSeconds(time: any) { 
     let seconds = parseInt(time);
 
     let hours = Math.floor(seconds / 3600);
@@ -74,19 +81,18 @@ export class MediaListComponent {
 
   getData(): Observable<VideoLesson[]> {
     return this.http.get<VideoLesson[]>(
-      `${this.apiUrl}/courses/1/topics/3/lessons/media`
+      `${this.apiUrl}/courses/${this.coursesId}/topics/${this.topicId}/lessons/media`
     );
   }
 
   ngOnInit() {
     this.getData().subscribe((data: any) => {
       this.mediaList = data.data;
+      console.log(data);
+      
       this.mediaList.forEach((e) => {
         e.durationMinutes = this.convertSeconds(e.durationSec);
       });
     });
-
-
-    alert("media list component")
   }
 }

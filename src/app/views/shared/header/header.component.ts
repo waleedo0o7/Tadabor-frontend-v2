@@ -35,9 +35,9 @@ export class HeaderComponent {
   }
 
 
-  onNav(id:Number){
-    this.sharedService.navSubject.next(id);
-    this.router.navigate([`/courses-list/${id}/topics-list`]);
+  onNavOpenTopics(id:Number){
+    this.sharedService.navSubject$.next(id);
+    this.router.navigate([`/courses-list/${id}/topics-list`]); 
   }
 
   ngOnInit() {

@@ -6,6 +6,7 @@ import {
   RouterLink,
   RouterLinkActive,
   ActivatedRoute,
+  Router,
 } from '@angular/router';
 import { CourseNavbarComponent } from '../shared/course-navbar/course-navbar.component';
 
@@ -31,11 +32,11 @@ export class TopicsListComponent {
 
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute , private sharedService: SharedService) {
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private sharedService: SharedService) {
 
-    this.coursesId = this.route.snapshot.paramMap.get('id');
+    this.coursesId = this.route.snapshot.paramMap.get('cid');
 
-    this.sharedService.navSubject.next(this.coursesId);
+    this.sharedService.navSubject$.next(this.coursesId);
 
   }
 
@@ -43,7 +44,7 @@ export class TopicsListComponent {
 
   coursesId: any;
 
-  getData(id:any): Observable<Topic[]> {
+  getData(id: any): Observable<Topic[]> {
 
     return this.http.get<Topic[]>(`
 
@@ -51,23 +52,32 @@ export class TopicsListComponent {
 
   }
 
+
+  onNavOpenMedia(tid: Number,topicName:string) {
+    this.sharedService.navSubject$.next(tid);
+    this.sharedService.topicName$.next(topicName);
+    this.router.navigate([`/courses-list/${this.coursesId}/topics-list/${tid}/media-list`]);
+  }
+
   ngOnInit() {
 
-    this.sharedService.navSubject.subscribe(
+    this.sharedService.navSubject$.subscribe(
 
       e => {
 
-        console.log(e);
 
         this.getData(e).subscribe((data: Topic[]) => {
 
           this.topicsList = data;
 
         });
+
       }
+      
     );
 
-    this.sharedService.navSubject.next(this.coursesId);
+    this.sharedService.navSubject$.next(this.coursesId);
 
   }
+
 }
