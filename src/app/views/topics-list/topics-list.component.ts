@@ -54,8 +54,7 @@ export class TopicsListComponent {
 
 
   onNavOpenMedia(tid: Number,topicName:string) {
-    this.sharedService.navSubject$.next(tid);
-    this.sharedService.topicName$.next(topicName);
+    this.sharedService.navSubject$.next(tid); 
     this.router.navigate([`/courses-list/${this.coursesId}/topics-list/${tid}/media-list`]);
   }
 

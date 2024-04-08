@@ -34,12 +34,12 @@ export class MediaListComponent {
   constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService: SharedService) {
     this.coursesId = this.route.snapshot.paramMap.get('cid');
     this.topicId = this.route.snapshot.paramMap.get('tid');
-    console.log(this.coursesId , this.topicId);
   }
 
   mediaList!: VideoLesson[];
   coursesId: any;
   topicId: any;
+  topicName:any;
   mediaListId: any;
 
   convertSeconds(time: any) { 
@@ -85,11 +85,20 @@ export class MediaListComponent {
     );
   }
 
+  getTopicName() {
+    this.http.get<any>(
+      `${this.apiUrl}/courses/${this.coursesId}/topics/${this.topicId}`).subscribe(e=>{this.topicName = e.name});
+  }
+
   ngOnInit() {
+
+    console.log('cid' , this.coursesId);
+    console.log('tid' , this.topicId);
+
+    this.getTopicName()
+
     this.getData().subscribe((data: any) => {
       this.mediaList = data.data;
-      console.log(data);
-      
       this.mediaList.forEach((e) => {
         e.durationMinutes = this.convertSeconds(e.durationSec);
       });

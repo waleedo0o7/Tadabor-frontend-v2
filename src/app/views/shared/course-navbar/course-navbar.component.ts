@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedService } from '../../../core/services/shared.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { SharedService } from '../../../core/services/shared.service';
 })
 export class CourseNavbarComponent {
 
+  @Input() topicName = '';
 
-  constructor(private sharedService:SharedService) {
-    this.sharedService.topicName$.subscribe( e => { console.log(e);})
-  }
+  constructor(private sharedService:SharedService) {}
+
+  ngOnInit(){}
 
 }

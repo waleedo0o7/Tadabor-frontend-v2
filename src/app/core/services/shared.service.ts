@@ -9,7 +9,6 @@ export class SharedService {
 
   constructor() { }
 
-  navSubject$ = new Subject()
-  topicName$ = new Subject()
+  navSubject$ = new Subject();
 
 }
