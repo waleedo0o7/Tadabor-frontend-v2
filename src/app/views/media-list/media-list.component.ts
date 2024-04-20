@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   RouterOutlet,
   RouterLink,
@@ -31,12 +31,13 @@ export class MediaListComponent {
 
   private apiUrl = environment.apiUrl;
 
+
   constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService: SharedService) {
     this.coursesId = this.route.snapshot.paramMap.get('cid');
     this.topicId = this.route.snapshot.paramMap.get('tid');
   }
 
-  mediaList!: VideoLesson[];
+  mediaList: VideoLesson[] = [];
   coursesId: any;
   topicId: any;
   topicName:any;
@@ -79,7 +80,7 @@ export class MediaListComponent {
     return s;
   }
 
-  getData(): Observable<VideoLesson[]> {
+  getVideoLessonsList(): Observable<VideoLesson[]> {
     return this.http.get<VideoLesson[]>(
       `${this.apiUrl}/courses/${this.coursesId}/topics/${this.topicId}/lessons/media`
     );
@@ -91,13 +92,11 @@ export class MediaListComponent {
   }
 
   ngOnInit() {
-
-    console.log('cid' , this.coursesId);
-    console.log('tid' , this.topicId);
+ 
 
     this.getTopicName()
 
-    this.getData().subscribe((data: any) => {
+    this.getVideoLessonsList().subscribe((data: any) => {
       this.mediaList = data.data;
       this.mediaList.forEach((e) => {
         e.durationMinutes = this.convertSeconds(e.durationSec);

@@ -40,11 +40,11 @@ export class TopicsListComponent {
 
   }
 
-  topicsList!: Topic[];
+  topicsList: Topic[] = [];
 
   coursesId: any;
 
-  getData(id: any): Observable<Topic[]> {
+  getTopicsList(id: any): Observable<Topic[]> {
 
     return this.http.get<Topic[]>(`
 
@@ -53,26 +53,29 @@ export class TopicsListComponent {
   }
 
 
-  onNavOpenMedia(tid: Number,topicName:string) {
-    this.sharedService.navSubject$.next(tid); 
+  onNavOpenMedia(tid: Number, topicName: string) {
+    this.sharedService.navSubject$.next(tid);
     this.router.navigate([`/courses-list/${this.coursesId}/topics-list/${tid}/media-list`]);
   }
 
   ngOnInit() {
+
 
     this.sharedService.navSubject$.subscribe(
 
       e => {
 
 
-        this.getData(e).subscribe((data: Topic[]) => {
+        this.getTopicsList(e).subscribe((data: Topic[]) => {
+
+          console.log(data);
 
           this.topicsList = data;
 
         });
 
       }
-      
+
     );
 
     this.sharedService.navSubject$.next(this.coursesId);

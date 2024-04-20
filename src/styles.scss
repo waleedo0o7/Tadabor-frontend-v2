@@ -25,6 +25,7 @@ body {
 
 .btn-primary {
   @apply inline-flex rounded-full bg-primary text-white py-3 px-6 duration-300;
+
   &:hover {
     @apply bg-primary-dark;
   }
@@ -32,6 +33,7 @@ body {
 
 .btn-light {
   @apply inline-flex rounded-full bg-white text-black py-3 px-6 duration-300;
+
   &:hover {
     @apply bg-gray-100;
   }
@@ -43,6 +45,7 @@ body {
 
 .btn-link {
   @apply inline-flex rounded-full bg-gray-100 text-black py-3 px-6 duration-300;
+
   &:hover {
     @apply bg-white;
   }
@@ -171,9 +174,11 @@ i.fa.fa-soundcloud {
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+
   .start {
     flex-grow: 1;
   }
+
   .end {
     width: 40px;
   }
@@ -195,4 +200,26 @@ i.fa.fa-soundcloud {
 
 .details-bar {
   @apply bg-gray-100 py-4;
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  @apply cursor-pointer;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.no-data {
+  font-size: 22px;
+  text-align: center;
+  padding: 50px 0;
 }

@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './views/home/home.component';
-import { CourseListComponent } from './views/course-list/course-list.component';
-import { CourseItemComponent } from './views/course-item/course-item.component';
+import { HomeComponent } from './views/home/home.component'; 
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { MediaListComponent } from './views/media-list/media-list.component';
 import { TextListComponent } from './views/text-list/text-list.component';
@@ -15,7 +13,8 @@ export const routes: Routes = [
 
   { path: 'courses-list/:cid/topics-list/:tid/media-list', component: MediaListComponent },
 
-  { path: 'text-list', component: TextListComponent },
-  { path: 'course-item', component: CourseItemComponent },
+  { path: 'courses-list/:cid/topics-list/:tid/text-list', component: TextListComponent },
+
   { path: '**', component: PageNotFoundComponent },
+
 ];
